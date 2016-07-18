@@ -8,7 +8,7 @@ Page {
       id: actionBar
       ufont: mainFont.name
       upEnabled: true
-      title: "<b>به روز رسانی</b>"
+      title: "<b>به روزرسانی</b>"
       showTitle: true
       onActionButtonClicked: back();
       z: 10
