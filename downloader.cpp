@@ -112,6 +112,8 @@ void Downloader::httpFinished()
       status = Downloader::Failed;
       this->error = reply->errorString();
       qDebug() << reply->errorString();
+      this->setFinish();
+      this->dc();
     } else if (!redirectionTarget.isNull()) {
       QUrl newUrl = url.resolved(redirectionTarget.toUrl());
       this->status = Downloader::Downloading;
@@ -142,10 +144,8 @@ void Downloader::startRequest(QUrl url)
 
 void Downloader::dc(){
   this->connects = false;
-  qDebug() << "disconnected " << this->PID << this->connects;
 }
 void Downloader::con(){
-  qDebug() << "connected " << this->PID;
   this->connects = true;
   if(this->status != Downloader::Downloading || this->status != Downloader::Queueed){
     this->setFinish();
