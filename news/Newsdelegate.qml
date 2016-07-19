@@ -149,8 +149,8 @@ Rectangle{
         textColor: "white"
         id: dlbtn
         text: "دریافت کمیک"
-        Layout.margins: 5
-        Layout.rightMargin: 10;Layout.leftMargin: 10
+        Layout.margins: bridge.getGlobal("padding")/2
+        Layout.rightMargin: bridge.getGlobal("padding");Layout.leftMargin: bridge.getGlobal("padding")
         MouseArea {
           id:downloader
           anchors.fill: parent
@@ -185,8 +185,8 @@ Rectangle{
         backgroundColor: "#d91314"
         textColor: "white"
         text: "پیش نمایش"
-        Layout.margins: 5
-        Layout.rightMargin: 10;Layout.leftMargin: 10
+        Layout.margins: bridge.getGlobal("padding")/2
+        Layout.rightMargin: bridge.getGlobal("padding");Layout.leftMargin: bridge.getGlobal("padding")
         MouseArea {
           id:downloaders
           anchors.fill: parent
@@ -199,8 +199,8 @@ Rectangle{
       RaisedButton {
         id: viewer
         text: "نمایش کمیک"
-        Layout.margins: 5
-        Layout.rightMargin: 10;Layout.leftMargin: 10
+        Layout.margins: bridge.getGlobal("padding")/2
+        Layout.rightMargin: bridge.getGlobal("padding");Layout.leftMargin: bridge.getGlobal("padding")
         visible: false
         MouseArea{
           anchors.fill: parent
@@ -209,15 +209,8 @@ Rectangle{
           }
         }
       }
-      ProgressBar {
-        id: prog
-        Layout.fillWidth: true
-        value: 0
-        Layout.margins: 5
-        Layout.rightMargin: 10;Layout.leftMargin: 10
-        visible: false
-
-      }
+      Row {
+        width: parent.width
       Button{
         id: canbtn
               onClicked: {
@@ -231,6 +224,16 @@ Rectangle{
               text: "×"
               visible: false
             }
+      ProgressBar {
+        id: prog
+        width: (canbtn.visible)?parent.width - canbtn.width:parent.width
+        value: 0
+        Layout.rightMargin: bridge.getGlobal("padding");Layout.leftMargin: bridge.getGlobal("padding")
+        visible: false
+        anchors.top: canbtn.top
+        anchors.topMargin: (canbtn.height - height)/2
+      }
+      }
       Text {
         id: stat
         text: "-- of --"

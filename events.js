@@ -11,10 +11,13 @@ function finishDownload(secc){
     stat.visible = false
     viewer.backgroundColor = "#FE4523"
     dlbtn.visible = false
+    canbtn.visible = false
     viewer.visible = true
   }else{
-    stat.text = "<span style=\"color:#FF0000; font-weight:bold;\">Download feiled!</span>"
+    stat.text = "<span style=\"color:#FF0000; font-weight:bold;\">خطا در دریافت کمیک!</span>"
     stat.textFormat= Text.RichText
+    canbtn.visible = false
+    dlbtn.enabled = true
   }
 }
 function foo(value){
