@@ -52,6 +52,7 @@ private:
   QFile *file;
   bool httpRequestAborted;
   bool CAB;
+  bool fualt;
 };
 
 #endif // DOWNLOADER_H

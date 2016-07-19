@@ -12,6 +12,7 @@ Downloader::Downloader(QString PID, QObject *root)
   this->surl = "";
   this->filePath = "";
   this->connects = true;
+  this->fualt = false;
 }
 
 void Downloader::downloadFile(const QString& href)
@@ -92,6 +93,8 @@ void Downloader::setFinish(){
 
 void Downloader::httpFinished()
 {
+  if(this->fualt)
+    return;
   this->status = Downloader::Completed;
   if (httpRequestAborted) {
       if (file) {
@@ -108,6 +111,7 @@ void Downloader::httpFinished()
   file->close();
   QVariant redirectionTarget = reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
   if (reply->error()) {
+      this->fualt = true;
       file->remove();
       status = Downloader::Failed;
       this->error = reply->errorString();
