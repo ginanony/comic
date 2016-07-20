@@ -82,7 +82,6 @@ void Downloader::setDlState(){
   emit completed(this,this->filePath);
   if(this->connects)
     this->setFinish();
-  //this->qparent->nextDownload();
 }
 void Downloader::setFinish(){
   QMetaObject::invokeMethod(root,
@@ -117,7 +116,7 @@ void Downloader::httpFinished()
       this->error = reply->errorString();
       qDebug() << reply->errorString();
       this->setFinish();
-      this->dc();
+      this->setDlState();
     } else if (!redirectionTarget.isNull()) {
       QUrl newUrl = url.resolved(redirectionTarget.toUrl());
       this->status = Downloader::Downloading;
