@@ -174,6 +174,23 @@ Rectangle{
           }
         }
       }
+
+      RaisedButton {
+        id: viewer
+        text: "نمایش کمیک"
+        backgroundColor: "#178b42"
+        textColor: "white"
+        Layout.margins: bridge.getGlobal("padding")/2
+        Layout.rightMargin: bridge.getGlobal("padding")
+        Layout.leftMargin: bridge.getGlobal("padding")
+        visible: false
+        MouseArea{
+          anchors.fill: parent
+          onClicked: {
+            present(Qt.resolvedUrl("../comicViewer/main.qml"));
+          }
+        }
+      }
       Rectangle{
         height: parent.height
         width: bridge.getGlobal("padding")
@@ -191,23 +208,10 @@ Rectangle{
           id:downloaders
           anchors.fill: parent
           onClicked: {
-            demo("qrc:///images/hoze.jpg")
+            demo(I_preview)
           }
         }
       }
-      }
-      RaisedButton {
-        id: viewer
-        text: "نمایش کمیک"
-        Layout.margins: bridge.getGlobal("padding")/2
-        Layout.rightMargin: bridge.getGlobal("padding");Layout.leftMargin: bridge.getGlobal("padding")
-        visible: false
-        MouseArea{
-          anchors.fill: parent
-          onClicked: {
-            present(Qt.resolvedUrl("../comicViewer/main.qml"));
-          }
-        }
       }
       Row {
         width: parent.width
