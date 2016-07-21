@@ -17,7 +17,7 @@ public slots:
   void touchDir(QString& path);
   QString getGname(QString& fileName);
   QString getAbsPath(QString name);
-  bool exists(QString path);
+  bool fexists(QString path);
 };
 #ifndef __ANDROID__
 class QAndroidJniObject{

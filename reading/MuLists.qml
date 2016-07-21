@@ -13,6 +13,10 @@ Page {
   //property ListElement t_model: ListElement{I_src:"foo"}
   property var topPage: root
   id:root
+
+  onEnabledChanged: {
+    json.json =  bridge.getList(0,bridge.getGlobal("countItem"));
+  }
   actionBar: ActionBar {
     id: actionBar
     ufont: mainFont.name

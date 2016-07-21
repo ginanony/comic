@@ -19,6 +19,11 @@ Page {
     Component.onCompleted: {
       bridge.setValue("tools", tools)
     }
+    onEnabledChanged: {
+      tabView.refresh()
+    }
+
+
   }
   FontLoader{
     id: mainFont

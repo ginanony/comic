@@ -90,9 +90,8 @@ bool Bridge::cancel(QString PID){
     }
   return false;
 }
-bool Bridge::exists(QString path){
-
-  return this->path.exists(path);
+bool Bridge::fexists(QString path){
+  return this->path.fexists(path);
 }
 void Bridge::completed(Downloader *obj, QString path){
   if(obj->status == Downloader::Completed){
@@ -183,6 +182,10 @@ QString Bridge::getComicInfo(QString id,QString key){
 QString Bridge::getComic(QString id){
   return this->db.getComic(id);
 }
+bool Bridge::removeComic(QString id){
+  return this->db.removeComic(id);
+}
+
 bool Bridge::setPage(QString id, int page){
   return this->db.setPage(id,page);
 }

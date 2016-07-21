@@ -7,6 +7,9 @@ import "../theme"
 Page {
   property bool inited: false
   Component.onCompleted: {
+    if(!bridge.fexists(bridge.getComicInfo(bridge.getValue("id"),"I_path")+"/pages.json"))
+      dialog2.open()
+
     bridge.setValue("page", bridge.getPage(bridge.getValue("id")));
     if(bridge.getValue("continue") == "YES"){
       tabView.currentIndex = bridge.getValue("page");
@@ -18,6 +21,24 @@ Page {
       dialog.open()
     }
     inited = true
+  }
+  Dialog {
+      id: dialog2
+      anchors.centerIn: parent
+      title: "کمیک حذف شود"
+      Text {
+        width: parent.width
+        wrapMode: Text.WordWrap
+          text: "احتمالا فایل های کمیک از روی حافظه شما پاک شده آیا می خواهید کمیک حذف شود؟"
+      }
+      z: 20
+      rejectButtonText: "بماند"
+      acceptButtonText: "حذف شود"
+      onAccepted: {
+        bridge.removeComic(bridge.getValue("id"));
+        back();
+      }
+
   }
   Dialog {
       id: dialog

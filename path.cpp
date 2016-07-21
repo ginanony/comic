@@ -59,7 +59,7 @@ QString Path::getGname(QString& fileName){
   qDebug() << fileName;
   return fileName;
 }
-bool Path::exists(QString path){
-  QDir dir(path);
-  return dir.exists();
+bool Path::fexists(QString path){
+  QFile file(path);
+  return file.exists();
 }

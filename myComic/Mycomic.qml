@@ -8,8 +8,13 @@ import ".."
 Page {
   property var topPage: root
   id:root
+  onVisibleChanged: {
+    refresh()
+  }
+
   function refresh() {
     json.json = bridge.getList(0,5);
+    json2.json = bridge.getList(5,6);
   }
   JSONListModel {
     id: json

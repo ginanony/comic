@@ -27,7 +27,7 @@ public slots:
   void cdl(QString PID, QObject *root);
   bool isdling(QString PID);
   bool cancel(QString PID);
-  bool exists(QString path);
+  bool fexists(QString path);
   void AddComic(QString url,
                 QString PID,
                 QObject *root,
@@ -44,6 +44,7 @@ public slots:
   QString getRList(int from, int to);
   QString getComicInfo(QString id,QString key);
   QString getComic(QString id);
+  bool removeComic(QString id);
   void nextDownload();
   bool setPage(QString id, int page);
   int getPage(QString id);

@@ -10,6 +10,7 @@ Page {
   onVisibleChanged: {
     bridge.setRoot(root);
   }
+
   actionBar: ActionBar {
     id: actionBar
     ufont: mainFont.name
@@ -29,6 +30,24 @@ Page {
     json: bridge.getComic(bridge.getValue("id"));
     query: "$[*]"
   }
+  Dialog {
+      id: dialog
+      anchors.centerIn: parent
+      title: "کمیک حذف شود"
+      Text {
+        width: parent.width
+        wrapMode: Text.WordWrap
+          text: "احتمالا فایل های کمیک از روی حافظه شما پاک شده آیا می خواهید کمیک حذف شود؟"
+      }
+      z: 20
+      rejectButtonText: "بماند"
+      acceptButtonText: "حذف شود"
+      onAccepted: {
+        bridge.removeComic(bridge.getValue("id"));
+        back()
+      }
+  }
+
   Repeater{
     delegate:
         Flickable{
@@ -48,6 +67,11 @@ Page {
         width: flick.width
         height: gl.height+bridge.getGlobal("padding")
         Column{
+
+          Component.onCompleted: {
+              if(!bridge.fexists(I_path+"/pages.json"))
+                dialog.open()
+          }
           id:gl
           spacing: bridge.getGlobal("padding")
           anchors.margins: bridge.getGlobal("padding")
