@@ -21,6 +21,10 @@ void Db::init(){
               \"ID\" INTEGER PRIMARY KEY AUTOINCREMENT,\"Json\" TEXT);");
   this->query("CREATE TABLE IF NOT EXISTS \"pagenav\" (\
               \"ID\" INTEGER PRIMARY KEY, \"page\" INTEGER);");
+  this->query("CREATE TABLE IF NOT EXISTS \"helpers\" (\
+              \"ID\" INTEGER PRIMARY KEY, \"Page\" TEXT, \"Viewed\" INTEGER);");
+  this->query("INSERT  OR IGNORE INTO helpers VALUES(1,\"Home\",0);");
+  this->query("INSERT  OR IGNORE INTO helpers VALUES(2,\"Comic\",0);");
 }
 //QString Db::search(QString key){
 //  QJsonArray res;
@@ -90,6 +94,11 @@ QString Db::getComic(QString id){
   QJsonDocument doc(res);
   return doc.toJson();
 }
+bool Db::removeComic(QString id){
+  this->result.exec("DELETE FROM pagenav WHERE ID = "+id);
+  return this->result.exec("DELETE FROM comics WHERE ID = "+id);
+}
+
 bool Db::check(QString id){
   QString gid;
   this->result.prepare("SELECT ID FROM comics WHERE ID = :id");

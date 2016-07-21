@@ -16,6 +16,7 @@ public slots:
   QString Rlist(int from = 0, int to = 10);
   QString getComic(QString id);
   QString getComicInfo(QString id);
+  bool removeComic(QString id);
   bool check(QString id);
   bool insert(QString id, QString data);
   bool setPage(QString id, int page);
