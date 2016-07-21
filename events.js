@@ -9,7 +9,6 @@ function finishDownload(secc){
   if(secc){
     prog.visible = false;
     stat.visible = false
-    viewer.backgroundColor = "#FE4523"
     dlbtn.visible = false
     canbtn.visible = false
     viewer.visible = true

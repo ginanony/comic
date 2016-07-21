@@ -51,10 +51,49 @@ Page {
       color: Qt.rgba(0.20,0.20,0.20,0.70)
       z: 100
       visible: false
-      MouseArea{anchors.fill: parent
-        onClicked: {
 
-          hide()
+      Column{
+        spacing: 7
+        anchors.centerIn: parent
+        id: dloading
+        width: parent.width
+        Rectangle{
+          id: xcdfff
+          width: parent.width
+          height: dbindic.height
+          color: "#00000000"
+        BusyIndicator {
+          id:dbindic
+            //anchors.leftMargin: parent.width - width / 2
+            anchors.centerIn: parent
+        }
+        Image {
+          anchors.top: dbindic.top
+          anchors.left: dbindic.left
+          id: dreLoad
+          visible: false
+          width: dbindic.width
+          height: dbindic.height
+          source: "qrc:///images/Refresh_icon.png"
+          MouseArea {
+            anchors.fill: parent
+            onClicked:  {
+
+              demoi.source = demoi.source+"?"
+              dloadText.text =  "در حال دریافت اطلاعات"
+              dbindic.visible = true
+              parent.visible = false
+            }
+          }
+        }
+        }
+          Text {
+          id: dloadText
+          color: "#ffffff"
+          width: parent.width
+          horizontalAlignment: Text.AlignHCenter
+          text: "در حال دریافت اطلاعات"
+
         }
       }
     }
@@ -71,8 +110,20 @@ Page {
             width = root.width -(20 * A.dp)
           x = (demor.width - width)/2
           y = (demor.height - height)/2
+          dloading.visible = false
         }
+            switch(demoi.status){
+            case Image.Loading:
+              dloadText.text = "در حال دریافت اطلاعات"
+              break
+            case Image.Error:
+                dloadText.text = "خطا! متاسفانه دریافت اطلاعات از شبکه کامل نشد."
+                dbindic.visible = false
+                dreLoad.visible = true
+              break
+            }
       }
+
       fillMode: Image.PreserveAspectFit
       z: 101
       MultiPointTouchArea {
@@ -201,6 +252,7 @@ Page {
           break
         }
       if(xml.status == XmlListModel.Ready){
+        console.log()
         loading.visible = false
         actionBar.title =  "<b>"+xml.get(0).I_title+"</b>"
       }
