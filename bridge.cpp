@@ -90,6 +90,10 @@ bool Bridge::cancel(QString PID){
     }
   return false;
 }
+bool Bridge::exists(QString path){
+
+  return this->path.exists(path);
+}
 void Bridge::completed(Downloader *obj, QString path){
   if(obj->status == Downloader::Completed){
       QZipReader qz(path);

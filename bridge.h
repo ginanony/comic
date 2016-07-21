@@ -27,6 +27,7 @@ public slots:
   void cdl(QString PID, QObject *root);
   bool isdling(QString PID);
   bool cancel(QString PID);
+  bool exists(QString path);
   void AddComic(QString url,
                 QString PID,
                 QObject *root,
