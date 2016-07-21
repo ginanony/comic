@@ -38,7 +38,7 @@ JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void*) {
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
-    app.setOrganizationName("Arvide");
+    app.setOrganizationName("Arvid");
         app.setOrganizationDomain("Arvidweb.com");
         app.setApplicationName("Comics");
     QQmlApplicationEngine engine;
