@@ -45,6 +45,8 @@ public slots:
   QString getComicInfo(QString id,QString key);
   QString getComic(QString id);
   bool removeComic(QString id);
+  bool isHelper(QString name);
+  bool viewedHelper(QString name);
   void nextDownload();
   bool setPage(QString id, int page);
   int getPage(QString id);

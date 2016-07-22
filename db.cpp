@@ -98,7 +98,21 @@ bool Db::removeComic(QString id){
   this->result.exec("DELETE FROM pagenav WHERE ID = "+id);
   return this->result.exec("DELETE FROM comics WHERE ID = "+id);
 }
-
+bool Db::isHelper(QString name){
+  this->result.setForwardOnly(true);
+  this->result.exec("SELECT Viewed FROM helpers WHERE Page = '"+name+"';");
+  if(!this->result.first())
+    return true;
+  if(this->result.value("Viewed").toInt() == 0)
+    return true;
+  return false;
+}
+bool Db::viewedHelper(QString name){
+  this->result.prepare("UPDATE helpers SET Viewed = 1 WHERE Page = :name");
+  this->result.bindValue(":name",name);
+  bool res2 = this->result.exec();
+  return res2;
+}
 bool Db::check(QString id){
   QString gid;
   this->result.prepare("SELECT ID FROM comics WHERE ID = :id");

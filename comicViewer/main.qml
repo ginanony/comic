@@ -7,6 +7,8 @@ import "../theme"
 Page {
   property bool inited: false
   Component.onCompleted: {
+    if(bridge.isHelper("Comic"))
+      helper.visible = true
     if(!bridge.fexists(bridge.getComicInfo(bridge.getValue("id"),"I_path")+"/pages.json"))
       dialog2.open()
 
@@ -56,6 +58,97 @@ Page {
         //if(bridge.getValue("page")< tabView.count)
           tabView.currentIndex = bridge.getValue("page");
       }
+  }
+  Rectangle{
+    id: helper
+    anchors.fill: parent
+    color: Qt.rgba(0.20,0.20,0.20,0.70)
+    z: 100
+    visible: false
+    Image {
+      id: helpTab
+      source: "qrc:///images/swipeleft.png"
+      anchors.top: parent.top
+      anchors.topMargin: (parent.height - height)/4
+      anchors.left: parent.left
+    }
+    Text {
+      id: helpTabText
+      text: "<b>
+برای خواندن به ترتیب داستان <br>
+انگشت خود را به سمت چپ بکشید
+</b>"
+      anchors.margins: bridge.getGlobal("padding")
+      verticalAlignment: Text.AlignJustify
+      color: "#FFFFFF"
+      font.family: mainFont.name
+      font.pixelSize: A.dp * 21
+      anchors.top: helpTab.top
+      anchors.left: helpTab.right
+      width: parent.width - helpTab.width - bridge.getGlobal("padding")
+      wrapMode: Text.WordWrap
+    }
+    Image {
+      id: helpRswipe
+      source: "qrc:///images/swiperight.png"
+      anchors.top: (helpTab.bottom>helpTabText.bottom)?helpTab.bottom:helpTabText.bottom
+      anchors.topMargin: bridge.getGlobal("padding")*2
+      anchors.right: parent.right
+    }
+    Text {
+      id: helpRswipeText
+      text: "<b>
+یا برای خواندن برعکس داستان <br>
+انگشت خود را به سمت راست بکشید
+</b>"
+      anchors.margins: bridge.getGlobal("padding")
+      color: "#FFFFFF"
+      font.family: mainFont.name
+      horizontalAlignment: Text.AlignRight
+      font.pixelSize: A.dp * 21
+      anchors.top: helpRswipe.top
+      anchors.right: helpRswipe.left
+      width: parent.width - helpRswipe.width - bridge.getGlobal("padding")
+      wrapMode: Text.WordWrap
+    }
+    FontLoader{
+      id: mainFont
+      source: "qrc:///fonts/BNazanin.ttf"
+    }
+
+    Image {
+      id: helpPull
+      source: "qrc:///images/dlbtab.png"
+      anchors.top: (helpRswipe.height>helpRswipeText.height)?helpRswipe.bottom:helpRswipeText.bottom
+      anchors.topMargin: bridge.getGlobal("padding")*4
+      anchors.left: parent.left
+    }
+    Text {
+      id: helpPullText
+      text: "<b>
+برای خروج از این حالت دوبار ضربه بزنید سپس: <br>
+۱. با کشیدن انگشت روی صفحه بین صفحات داستان حرکت کنید<br>
+۲. برای انتخاب بخشی از داستان روی آن بخش دوبار ضربه بزنید
+</b>"
+      anchors.margins: bridge.getGlobal("padding")
+      verticalAlignment: Text.AlignJustify
+      color: "#FFFFFF"
+      font.family: mainFont.name
+      font.pixelSize: A.dp * 21
+      anchors.top: helpPull.top
+      anchors.topMargin: (helpPull.height>height)?(helpPull.height - height) /2:0
+      anchors.left: helpPull.right
+
+      width: parent.width - helpPull.width - bridge.getGlobal("padding")
+      wrapMode: Text.WordWrap
+    }
+    MouseArea{
+      anchors.fill: parent
+      onClicked: {
+        parent.visible = false
+        bridge.viewedHelper("Comic")
+      }
+    }
   }
   id: root
   function makeStruct(names) {

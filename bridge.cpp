@@ -98,8 +98,11 @@ void Bridge::completed(Downloader *obj, QString path){
       QZipReader qz(path);
       QString npath = this->path.getAbsPath(obj->data["I_id"].toString());
       qz.extractAll(npath);
+      qz.close();
       this->setPerm(npath);
       obj->data["I_path"]    =    npath;
+      QFile zip(path);
+      zip.deleteLater();
       QByteArray ba;
       ba.append(obj->data["image"].toString());
 
@@ -185,6 +188,12 @@ QString Bridge::getComic(QString id){
 bool Bridge::removeComic(QString id){
   return this->db.removeComic(id);
 }
+bool Bridge::isHelper(QString name){
+  return this->db.isHelper(name);
+}
+bool Bridge::viewedHelper(QString name){
+  return this->db.viewedHelper(name);
+}
 
 bool Bridge::setPage(QString id, int page){
   return this->db.setPage(id,page);
@@ -195,9 +204,9 @@ int Bridge::getPage(QString id){
 }
 
 QString Bridge::server(){
-  //return "http://parazitt.ir/comics";
+  //return "http://comik.ir";
   if(_PLAT == 0){
-      return "http://parazitt.ir/comics";
+      return "http://comik.ir";
     }
   return "http://127.0.0.1/blog2";
 }
