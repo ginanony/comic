@@ -51,7 +51,7 @@ Page {
       color: Qt.rgba(0.20,0.20,0.20,0.70)
       z: 100
       visible: false
-
+MouseArea{anchors.fill: parent; onClicked: {}}
       Column{
         spacing: 7
         anchors.centerIn: parent
