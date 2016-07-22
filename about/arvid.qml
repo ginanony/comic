@@ -55,7 +55,7 @@ Page {
         wrapMode: Text.WordWrap
         horizontalAlignment: Text.AlignJustify
         width: parent.width
-        text: "<b>درباره آروید اینجا قرار می گیرد... درباره آروید اینجا قرار می گیرد... درباره آروید اینجا قرار می گیرد... درباره آروید اینجا قرار می گیرد... درباره آروید اینجا قرار می گیرد... درباره آروید اینجا قرار می گیرد... درباره آروید اینجا قرار می گیرد... </b>"
+        text: "<b></b>"
       }
       Rectangle{
         width: parent.width

@@ -50,7 +50,9 @@ Page {
         wrapMode: Text.WordWrap
         horizontalAlignment: Text.AlignJustify
         width: parent.width
-        text: "<b>درباره حوزه هنری اینجا قرار می گیرد... درباره حوزه هنری اینجا قرار می گیرد... درباره حوزه هنری اینجا قرار می گیرد... درباره حوزه هنری اینجا قرار می گیرد... درباره حوزه هنری اینجا قرار می گیرد... درباره حوزه هنری اینجا قرار می گیرد... درباره حوزه هنری اینجا قرار می گیرد... </b>"
+        text: "<b>حوزه هنری استان لرستان واحد انیمیشن آدرس:
+<br>لرستان، خرم آباد، خیابان علوی، خیابان دکتر حسابی، نبش آرش 6 روبه روی آموزش و پرورش<br>
+<br>تلفن: 33435302  فکس : 33435303 </b>"
       }
       Rectangle{
         width: parent.width
@@ -68,7 +70,7 @@ Page {
           MouseArea {
             anchors.fill: parent
             onClicked: {
-              Qt.openUrlExternally("http://arvidweb.com")
+              Qt.openUrlExternally("http://cafebazaar.ir")
             }
           }
         }
@@ -80,7 +82,7 @@ Page {
           MouseArea {
             anchors.fill: parent
             onClicked: {
-              Qt.openUrlExternally("http://arvidweb.com")
+              Qt.openUrlExternally("http://artlorestan.ir")
             }
           }
         }
