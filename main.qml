@@ -39,6 +39,11 @@ Window {
       3.4. Once everything is ready, set Window.visible to true and perform a fade-in animation on Loader
 
      */
+    Image {
+      id: msplash
+      source: "qrc:///images/xsplash.jpg"
+      anchors.fill: parent
+    }
     Loader {
         id: loader
         anchors.fill: parent
@@ -51,6 +56,7 @@ Window {
             message: messages
             objectName: "PageStack";
             initialPage: Mains {
+                splash: msplash
                 width: window.width
                 onPresented: {
                     window.visible = true;
