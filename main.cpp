@@ -6,7 +6,6 @@
 #include "quickandroid.h"
 #include "qadrawableprovider.h"
 #include "qasystemdispatcher.h"
- #include <QMediaPlayer>
 #include <qjsonobject.h>
 
 #include "automator.h"

@@ -1,7 +1,6 @@
 TEMPLATE = app
 ZLIBP = $${PWD}/zlib-1.2.8
 QUAZIPP = $${PWD}/quazip
-QT += multimedia multimediawidgets
 unix {
     LIBS += -L$${ZLIBP} -lz
 }
