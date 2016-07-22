@@ -17,6 +17,8 @@ public slots:
   QString getComic(QString id);
   QString getComicInfo(QString id);
   bool removeComic(QString id);
+  bool isHelper(QString name);
+  bool viewedHelper(QString name);
   bool check(QString id);
   bool insert(QString id, QString data);
   bool setPage(QString id, int page);
