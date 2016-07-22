@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import QuickAndroid 0.1
 import QuickAndroid.Styles 0.1
-import QtQuick.Layouts 1.1
+import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.1
 import "../events.js" as E
 import ".."
@@ -11,6 +11,50 @@ Page {
   onVisibleChanged: {
     refresh()
   }
+  Column{
+    id: havent
+    spacing: bridge.getGlobal("padding")
+    anchors.centerIn: parent
+    width: parent.width
+    visible: (json.count < 1)
+    z:100
+    Rectangle{
+      width: parent.width
+      height: bindic.height
+      color: "#00000000"
+    BusyIndicator {
+      id:bindic
+        //anchors.leftMargin: parent.width - width / 2
+        anchors.centerIn: parent
+        visible: false
+    }
+    Image {
+      anchors.top: bindic.top
+      anchors.left: bindic.left
+      id: reLoad
+      width: bindic.width
+      height: bindic.height
+      source: "qrc:///images/arrow.png"
+      MouseArea {
+        anchors.fill: parent
+        onClicked:  {
+        }
+      }
+    }
+    }
+    Text {
+      id: loadText
+      width: parent.width
+      horizontalAlignment: Text.AlignHCenter
+      text: "در حال حاضر کمیکی ندارید!"
+    }
+    Text {
+      id: loadText2
+      width: parent.width
+      horizontalAlignment: Text.AlignHCenter
+      text: "به قسمت کمیک جدید بروید و کمیک دریافت کنید."
+    }
+  }
 
   function refresh() {
     json.json = bridge.getList(0,5);
@@ -19,6 +63,7 @@ Page {
   JSONListModel {
     id: json
     json: bridge.getList(0,5);
+
     query: "$[*]"
   }
   FontLoader{

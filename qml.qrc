@@ -83,5 +83,6 @@
         <file>images/swiperight.png</file>
         <file>images/dlbtab.png</file>
         <file>images/xsplash.jpg</file>
+        <file>images/arrow.png</file>
     </qresource>
 </RCC>
