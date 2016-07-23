@@ -88,7 +88,7 @@ Rectangle{
 
         Text{
         id: desc
-        text:I_samary
+        text:I_samary+"\n\nحجم فایل: "+I_size+"\n\nتعداد صفحات:  "+I_page+" صفحه"
         font.family: mainFont.name
         font.pixelSize: A.dp * 16
         wrapMode: Text.WordWrap
