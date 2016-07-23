@@ -223,7 +223,7 @@ Page {
     }
   }
   Column{
-    spacing: 7
+    spacing: bridge.getGlobal("padding")
     anchors.centerIn: parent
     id: loading
     width: parent.width
