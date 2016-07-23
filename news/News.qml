@@ -13,6 +13,7 @@ Page {
   property bool active: true
   property bool firstLoad: false
   property var model1: []
+  property bool next: false
   property ListModel g_model: ListModel{id:foo}
   id: root
   FontLoader{
@@ -56,6 +57,7 @@ Page {
     XmlRole { name: "I_size"; query: "size/number()"}
     XmlRole { name: "I_id"; query: "id/number()"}
     XmlRole { name: "I_title"; query: "title/string()"}
+    XmlRole { name: "I_next"; query: "next/string()"}
     XmlRole { name: "I_desc"; query: "description/string()"}
   }
 
@@ -95,6 +97,7 @@ Page {
     XmlRole { name: "I_size"; query: "size/number()"}
     XmlRole { name: "I_id"; query: "id/number()"}
     XmlRole { name: "I_title"; query: "title/string()"}
+    XmlRole { name: "I_next"; query: "next/string()"}
     XmlRole { name: "I_desc"; query: "description/string()"}
   }
   Flickable{
@@ -122,7 +125,7 @@ Page {
               border.color: "#6f6f6f"
               width: name.width+5
               height: childrenRect.height+bridge.getGlobal("padding")
-
+Component.onCompleted: {next = (I_next== "YES")}
               Image {BusyIndicator{id:iloading; anchors.centerIn: parent}
                 id: name
                 source: I_src
@@ -209,7 +212,7 @@ Page {
       }
       RaisedButton {
         text: "بیشتر..."
-        visible: (g_model.count>0)
+        visible: next
         onClicked: {
           root.page ++;
           loading.visible = true
