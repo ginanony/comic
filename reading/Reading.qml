@@ -71,12 +71,6 @@ Page {
       horizontalAlignment: Text.AlignHCenter
       text: "در حال حاضر کمیکی ندارید!"
     }
-    Text {
-      id: loadText2
-      width: parent.width
-      horizontalAlignment: Text.AlignHCenter
-      text: "به قسمت کمیک جدید بروید و کمیک دریافت کنید."
-    }
   }
   JSONListModel {
     id: json2

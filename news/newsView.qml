@@ -252,7 +252,6 @@ MouseArea{anchors.fill: parent; onClicked: {}}
           break
         }
       if(xml.status == XmlListModel.Ready){
-        console.log()
         loading.visible = false
         actionBar.title =  "<b>"+xml.get(0).I_title+"</b>"
       }

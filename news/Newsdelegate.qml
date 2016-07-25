@@ -158,7 +158,6 @@ Rectangle{
             prog.visible = true
             stat.visible = true
             dling = true
-            console.log(I_file)
             bridge.AddComic(I_file,
                             "NDG_"+bridge.getValue("id"),
                             root,

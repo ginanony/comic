@@ -102,7 +102,7 @@ void Bridge::completed(Downloader *obj, QString path){
       this->setPerm(npath);
       obj->data["I_path"]    =    npath;
       QFile zip(path);
-      zip.deleteLater();
+      zip.remove();
       QByteArray ba;
       ba.append(obj->data["image"].toString());
 
