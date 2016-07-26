@@ -56,7 +56,6 @@ QString Path::getGname(QString& fileName){
   if (QFile::exists(fileName)) {
       QFile::remove(fileName);
     }
-  qDebug() << fileName;
   return fileName;
 }
 bool Path::fexists(QString path){

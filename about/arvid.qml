@@ -3,11 +3,6 @@ import QuickAndroid 0.1
 import QuickAndroid.Styles 0.1
 import ".."
 Page {
-  Component.onCompleted: {
-    console.log(bridge.getValue("tools"))
-    var t = bridge.getValue("tools");
-    t.text = "yeah"
-  }
   id: root
   actionBar: ActionBar {
       id: actionBar

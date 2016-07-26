@@ -130,7 +130,7 @@ Page {
       }
 
       anchors.topMargin: bridge.getGlobal("padding")
-      visible: (json2.count > 1)
+      visible: (json2.count > 0)
       id:button
 
     }
@@ -142,7 +142,7 @@ Page {
       anchors.topMargin: bridge.getGlobal("padding")
       text: "<b>کمیک ها</b>"
       font.pixelSize: 18 * A.dp
-      visible: (json2.count > 1)
+      visible: (json2.count > 0)
       font.family: mainFont.name
     }
     Flickable{
@@ -152,7 +152,7 @@ Page {
       anchors.topMargin: bridge.getGlobal("padding")
       width: parent.width
       height: rr.height
-      visible: (json2.count > 2)
+      visible: (json2.count > 0)
       Row {
         id:rr
         spacing: 10

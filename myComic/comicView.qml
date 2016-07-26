@@ -70,7 +70,12 @@ Page {
 
           Component.onCompleted: {
               if(!bridge.fexists(I_path+"/pages.json"))
-                dialog.open()
+
+                if(I_path == "http://"){
+                  back();
+                }else{
+                  dialog2.open()
+                }
           }
           id:gl
           spacing: bridge.getGlobal("padding")

@@ -10,8 +10,11 @@ Page {
     if(bridge.isHelper("Comic"))
       helper.visible = true
     if(!bridge.fexists(bridge.getComicInfo(bridge.getValue("id"),"I_path")+"/pages.json"))
-      dialog2.open()
-
+      if(bridge.getComicInfo(bridge.getValue("id"),"I_path") == "http://"){
+        back();
+      }else{
+        dialog2.open()
+      }
     bridge.setValue("page", bridge.getPage(bridge.getValue("id")));
     if(bridge.getValue("continue") == "YES"){
       tabView.currentIndex = bridge.getValue("page");
@@ -19,45 +22,45 @@ Page {
     }else if(bridge.getValue("continue") == "NO"){
       bridge.setValue("continue",false)
     }else{
-    if(bridge.getValue("page")>0)
-      dialog.open()
+      if(bridge.getValue("page")>0)
+        dialog.open()
     }
     inited = true
   }
   Dialog {
-      id: dialog2
-      anchors.centerIn: parent
-      title: "کمیک حذف شود"
-      Text {
-        width: parent.width
-        wrapMode: Text.WordWrap
-          text: "احتمالا فایل های کمیک از روی حافظه شما پاک شده آیا می خواهید کمیک حذف شود؟"
-      }
-      z: 20
-      rejectButtonText: "بماند"
-      acceptButtonText: "حذف شود"
-      onAccepted: {
-        bridge.removeComic(bridge.getValue("id"));
-        back();
-      }
+    id: dialog2
+    anchors.centerIn: parent
+    title: "کمیک حذف شود"
+    Text {
+      width: parent.width
+      wrapMode: Text.WordWrap
+      text: "احتمالا فایل های کمیک از روی حافظه شما پاک شده آیا می خواهید کمیک حذف شود؟"
+    }
+    z: 20
+    rejectButtonText: "بماند"
+    acceptButtonText: "حذف شود"
+    onAccepted: {
+      bridge.removeComic(bridge.getValue("id"));
+      back();
+    }
 
   }
   Dialog {
-      id: dialog
-      anchors.centerIn: parent
-      title: "خواندن از ادامه"
-      Text {
-        width: parent.width
-        wrapMode: Text.WordWrap
-          text: "آیا می خواهید داستان از آخرین صفحه ای که می خواندید شروع شود؟"
-      }
-      z: 20
-      rejectButtonText: "شروع از ابتدا"
-      acceptButtonText: "ادامه"
-      onAccepted: {
-        //if(bridge.getValue("page")< tabView.count)
-          tabView.currentIndex = bridge.getValue("page");
-      }
+    id: dialog
+    anchors.centerIn: parent
+    title: "خواندن از ادامه"
+    Text {
+      width: parent.width
+      wrapMode: Text.WordWrap
+      text: "آیا می خواهید داستان از آخرین صفحه ای که می خواندید شروع شود؟"
+    }
+    z: 20
+    rejectButtonText: "شروع از ابتدا"
+    acceptButtonText: "ادامه"
+    onAccepted: {
+      //if(bridge.getValue("page")< tabView.count)
+      tabView.currentIndex = bridge.getValue("page");
+    }
   }
   Rectangle{
     id: helper
@@ -242,7 +245,7 @@ Page {
                   reinit(true)
                   bridge.setValue("Last",1)
                   if(tabView.currentIndex>0)
-                  tabView.currentIndex--;
+                    tabView.currentIndex--;
                 }
                 break
               }
