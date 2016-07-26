@@ -13,7 +13,6 @@ Page {
     MouseArea {
       anchors.fill: parent
       onClicked: {
-        console.log("fuck")
         tabView.currentIndex = 2
       }
     }
@@ -37,7 +36,6 @@ Page {
                 MouseArea {
                   anchors.fill: parent
                   onClicked: {
-                    console.log("fuck")
                     tabView.currentIndex = 2
                   }
                 }
