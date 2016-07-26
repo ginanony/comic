@@ -19,6 +19,56 @@ Db::Db()
 void Db::init(){
   this->query("CREATE TABLE IF NOT EXISTS \"comics\" (\
               \"ID\" INTEGER PRIMARY KEY AUTOINCREMENT,\"Json\" TEXT);");
+  this->query("INSERT OR IGNORE INTO \"comics\" VALUES(\
+              7,'{\
+                \"I_id\": \"7\",\
+                \"I_page\": \"\",\
+                \"I_path\": \"http://\",\
+                \"I_samary\": \" \",\
+                \"I_size\": \"\",\
+                \"I_src\": \"qrc:///images/comic/7.jpg\",\
+                \"I_title\": \"شهید بروجردی\"\
+            }')");
+  this->query("INSERT OR IGNORE INTO \"comics\" VALUES(\
+                  31,'{\
+                    \"I_id\": \"31\",\
+                    \"I_page\": \"\",\
+                    \"I_path\": \"http://\",\
+                    \"I_samary\": \" \",\
+                    \"I_size\": \"\",\
+                    \"I_src\": \"qrc:///images/comic/31.jpg\",\
+                    \"I_title\": \"شهید سعیدی\"\
+                }')");
+      this->query("INSERT OR IGNORE INTO \"comics\" VALUES(\
+                  33,'{\
+                    \"I_id\": \"33\",\
+                    \"I_page\": \"\",\
+                    \"I_path\": \"http://\",\
+                    \"I_samary\": \" \",\
+                    \"I_size\": \"\",\
+                    \"I_src\": \"qrc:///images/comic/33.jpg\",\
+                    \"I_title\": \"ابن سیرین\"\
+                }')");
+      this->query("INSERT OR IGNORE INTO \"comics\" VALUES(\
+                  46,'{\
+                    \"I_id\": \"46\",\
+                    \"I_page\": \"\",\
+                    \"I_path\": \"http://\",\
+                    \"I_samary\": \" \",\
+                    \"I_size\": \"\",\
+                    \"I_src\": \"qrc:///images/comic/46.jpg\",\
+                    \"I_title\": \"سرزمینی از بهشت\"\
+                }')");
+      this->query("INSERT OR IGNORE INTO \"comics\" VALUES(\
+                  32,'{\
+                    \"I_id\": \"32\",\
+                    \"I_page\": \"\",\
+                    \"I_path\": \"http://\",\
+                    \"I_samary\": \" \",\
+                    \"I_size\": \"\",\
+                    \"I_src\": \"qrc:///images/comic/32.jpg\",\
+                    \"I_title\": \"شهید کیارش\"\
+                }')");
   this->query("CREATE TABLE IF NOT EXISTS \"pagenav\" (\
               \"ID\" INTEGER PRIMARY KEY, \"page\" INTEGER);");
   this->query("CREATE TABLE IF NOT EXISTS \"helpers\" (\
@@ -130,7 +180,12 @@ bool Db::insert(QString id, QString data){
   this->result.prepare("INSERT INTO comics (ID, Json)VALUES(:id, :data);");
   this->result.bindValue(":id",id);
   this->result.bindValue(":data",data);
-  return this->result.exec();
+  bool res = this->result.exec();
+  this->result.prepare("UPDATE comics SET Json = :data WHERE ID = :id");
+  this->result.bindValue(":id",id);
+  this->result.bindValue(":data",data);
+  bool res2 = this->result.exec();
+  return res || res2;
 }
 bool Db::setPage(QString id, int page){
   this->result.prepare("INSERT OR IGNORE INTO pagenav (ID, page) VALUES (:id , :page)");

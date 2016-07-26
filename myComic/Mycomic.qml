@@ -95,18 +95,24 @@ Page {
         model: json.model
         delegate: Image {
           id: name
+          fillMode: Image.PreserveAspectCrop
           Layout.row: (index<=1)?0:Math.floor(((index+1)/3)+1)
           Layout.column: (index==0)?0:Math.floor((index+1)%3)
-          source: "file://"+I_src
+          source: (I_path=="http://")?I_src:"file://"+I_src
           Layout.fillWidth: true
-          Layout.maximumHeight: parent.width/3
+          Layout.maximumHeight: (Layout.row>0)?parent.width/3:(parent.width/3)*2
           Layout.columnSpan: (index==0)?2:1*1
           Layout.rowSpan: (index==0)?2:1*1
           MouseArea {
             onClicked: {
               bridge.setValue("id", I_id)
-              bridge.setValue("path",I_path)
-              root.topPage.present(Qt.resolvedUrl("comicView.qml"));
+              if(I_path == "http://"){
+                root.topPage.present(Qt.resolvedUrl("../news/newsView.qml"));
+              }else{
+
+                bridge.setValue("path",I_path)
+                root.topPage.present(Qt.resolvedUrl("comicView.qml"));
+              }
             }
             anchors.fill: parent
           }

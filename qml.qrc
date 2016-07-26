@@ -84,5 +84,14 @@
         <file>images/dlbtab.png</file>
         <file>images/xsplash.jpg</file>
         <file>images/arrow.png</file>
+        <file>images/comic/7.jpg</file>
+        <file>images/comic/31.jpg</file>
+        <file>images/comic/32.jpg</file>
+        <file>images/comic/33.jpg</file>
+        <file>images/comic/46.jpg</file>
+        <file>images/utdg.png</file>
+        <file>images/dtug.png</file>
+        <file>images/rtlg.png</file>
+        <file>images/ltrg.png</file>
     </qresource>
 </RCC>
