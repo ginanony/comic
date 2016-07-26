@@ -100,7 +100,6 @@ MouseArea{anchors.fill: parent; onClicked: {}}
     Image {
       id: demoi
       Drag.active: true
-      //anchors.centerIn: demor
       visible: false
       onStatusChanged: {
         if(status == Image.Ready){
@@ -270,6 +269,7 @@ MouseArea{anchors.fill: parent; onClicked: {}}
     id: nav
     topPage: root
     anchors.fill: parent
+    z: 100
   }
 
   Column{
