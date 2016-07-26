@@ -18,11 +18,16 @@ Rectangle {
     {x:674,y:1054,w:597,h:1005}
   ]
   property int current: -2;
+  property int px: 0
+  property int py: 0
   visible: true
   /*anchors.fill: parent*/
   function reinit(){
     if(window.resizing) return;
     var i; var x; var y; var w; var h;
+
+
+
     window.current = 0
     window.cf =  window.width /image.width
     if(image.height*window.cf>window.height){
@@ -47,7 +52,14 @@ Rectangle {
       window.zoom[i].x *= window.cf
       window.zoom[i].y *= window.cf
     }
-
+    utdhAnimation.to = 0
+    utdyAnimation.to = window.height
+    rtlwAnimation.to = 0
+    rtlxAnimation.to = window.width
+    dtuhAnimation.to = 0
+    dtuyAnimation.to = 0
+    ltrwAnimation.to = 0
+    ltrxAnimation.to = 0
     xAnimation.to = x
     yAnimation.to = y
     wAnimation.to = w
@@ -58,9 +70,20 @@ Rectangle {
   }
 
   function init() {
+    rtlg.width = 0;
     // on_load >> image size to window size
     if(window.current<-1 && window.width && image.width){
       var i;
+
+      utdg.height =  0
+      utdg.y = window.height
+      rtlg.width = 0
+      rtlg.x = window.x
+      dtug.height = 0
+      dtug.y = 0
+      ltrg.width = 0
+      ltrg.x = 0
+
       window.current = 0
       window.wsize.width = image.width
       window.wsize.hieght= image.height
@@ -120,40 +143,72 @@ Rectangle {
         window.current++;
       }else{return true;}
     }
+    var fullWidth;
     if((window.zoom[window.current].w*window.wsize.hieght/window.wsize.width) > window.zoom[window.current].h){
       f = (window.wsize.width/window.zoom[window.current].w )/window.cf;
+      fullWidth = true
     }else{
       f = (window.wsize.hieght/window.zoom[window.current].h )/window.cf;
+      fullWidth = false;
     }
     window.cf *= f;
     var h = image.height* f;
     var w = image.width * f;
     var x = -(window.zoom[window.current].x*f);
-    //                var nx = (window.wsize.width - w) /2
+    var y = -(window.zoom[window.current].y*f)
+    var gy = 0;
+    var gh = 0;
+    var gw = 0;
+    var gx = 0;
+    if(!fullWidth){
+                    //var nx = (window.wsize.width - (window.zoom[window.current].w*f)) /2
+      gy = window.height
+      gh = 0
+
+      gx = (window.zoom[window.current].w*(window.height / window.zoom[window.current].h))
+      gw = window.width - gx
+      gx += gw/2
+      px = gw /= 2
+      x += gw
     //                console.log(nx)
     //                if(image.x<0){
     //                  //x += nx
     //                }else {
     //                  //x -= nx
     //                }
-
-    var y = -(window.zoom[window.current].y*f)
-    //                var ny = (window.wsize.height - y) /2
+    }else{
+                    //var ny = (window.wsize.height -  (window.zoom[window.current].h*f)) /2
+      gy = (window.zoom[window.current].h*(window.width / window.zoom[window.current].w))
+      gh = window.height - gy
+      gy += gh / 2
+      py = gh /= 2;
+      gx = window.width
+      gw = 0
+      y += gh
     //                console.log(ny)
     //                if(y<0){
     //                  y += ny
     //                }else {
     //                  y -= ny
     //                }
+    }
     for(i = 0; i<window.zoom.length;i++){
       window.zoom[i].x *= f
       window.zoom[i].y *= f
+      window.zoom[i]._w *= f
+      window.zoom[i]._h *= f
       window.zoom[i].hd*= f
     }
     xAnimation.to = x
     yAnimation.to = y
     wAnimation.to = w
     hAnimation.to = h
+    utdhAnimation.to = gh
+    utdyAnimation.to = gy
+    rtlwAnimation.to = gw
+    rtlxAnimation.to = gx
+    dtuhAnimation.to = gh
+    ltrwAnimation.to = gw
     animateHead.start();
 
     //    var pw =  window.zoom[window.current].w - window.zoom[window.current].x;
@@ -222,6 +277,59 @@ Rectangle {
       properties: "height";
       duration: 500;
     }
+    NumberAnimation {
+      id: utdhAnimation
+      target: utdg;
+      properties: "height";
+      duration: 500;
+    }
+    NumberAnimation {
+      id: utdyAnimation
+      target: utdg;
+      properties: "y";
+      duration: 500;
+    }
+    NumberAnimation {
+      id: rtlwAnimation
+      target: rtlg;
+      properties: "width";
+      duration: 500;
+    }
+    NumberAnimation {
+      id: rtlxAnimation
+      target: rtlg;
+      properties: "x";
+      duration: 500;
+    }
+
+
+
+
+
+    NumberAnimation {
+      id: dtuhAnimation
+      target: dtug;
+      properties: "height";
+      duration: 500;
+    }
+    NumberAnimation {
+      id: dtuyAnimation
+      target: dtug;
+      properties: "y";
+      duration: 500;
+    }
+    NumberAnimation {
+      id: ltrwAnimation
+      target: ltrg;
+      properties: "width";
+      duration: 500;
+    }
+    NumberAnimation {
+      id: ltrxAnimation
+      target: ltrg;
+      properties: "x";
+      duration: 500;
+    }
   }
   Image {
     id: image
@@ -231,5 +339,37 @@ Rectangle {
     width: parent.width
     height: parent.height
     fillMode: Image.PreserveAspectFit
+  }
+  Image {
+    source: "qrc:///images/utdg.png"
+    id: utdg
+    width: parent.width
+    height: 0
+    y: parent.height
+  }
+
+  Image {
+
+    source: "qrc:///images/rtlg.png"
+    id: rtlg
+    width: 0
+    height: parent.height
+    x: parent.x
+  }
+  Image {
+    source: "qrc:///images/dtug.png"
+    id: dtug
+    width: parent.width
+    height: 0
+    y: 0
+  }
+
+  Image {
+
+    source: "qrc:///images/ltrg.png"
+    id: ltrg
+    width: 0
+    height: parent.height
+    x: 0
   }
 }
